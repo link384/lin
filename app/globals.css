@@ -1,0 +1,172 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  color-scheme: light;
+  --background: oklch(0.99 0.004 260);
+  --foreground: oklch(0.21 0.03 264);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.03 264);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.03 264);
+
+  --primary: oklch(0.55 0.22 258);
+  --primary-foreground: oklch(0.99 0.01 260);
+
+  --secondary: oklch(0.96 0.012 258);
+  --secondary-foreground: oklch(0.28 0.05 264);
+
+  --muted: oklch(0.965 0.008 260);
+  --muted-foreground: oklch(0.52 0.03 262);
+
+  --accent: oklch(0.72 0.15 210);
+  --accent-foreground: oklch(0.18 0.03 264);
+
+  --destructive: oklch(0.58 0.22 27);
+
+  --border: oklch(0.91 0.01 260);
+  --input: oklch(0.91 0.01 260);
+  --ring: oklch(0.55 0.22 258);
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    overflow-x: hidden;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-width: 320px;
+    overflow-x: hidden;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ============================================================
+   Resaltado brillante inspirado en el texto de referencia.
+   ============================================================ */
+@keyframes shiny-sec {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.shiny-logo {
+  transform-origin: center;
+  animation: shiny-logo 3.5s ease-in-out infinite;
+}
+
+@keyframes shiny-logo {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.16) saturate(1.18) drop-shadow(0 0 0.65rem color-mix(in oklch, var(--color-primary) 45%, transparent));
+  }
+}
+
+.shiny-sec {
+  color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    oklch(0.72 0.2 300) 25%,
+    oklch(0.96 0.05 300),
+    oklch(0.72 0.2 300) 75%
+  );
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shiny-sec 3.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   Texto de caracteristica resaltada — degradado animado moderno.
+   ============================================================ */
+@keyframes feature-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.feature-highlight {
+  font-weight: 700;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent),
+    color-mix(in oklch, var(--color-accent) 55%, white),
+    var(--color-accent),
+    var(--color-primary)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: feature-shine 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-logo,
+  .shiny-sec,
+  .feature-highlight {
+    animation: none;
+  }
+}
